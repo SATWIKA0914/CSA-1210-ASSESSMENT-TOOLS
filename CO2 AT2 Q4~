@@ -1,0 +1,44 @@
+
+MVI B,FAH       
+MVI C,05H       
+MVI D,00H       
+MVI E,00H       
+MVI L,08H       
+
+LOOP: MOV A,C
+      ANI 01H
+      MOV H,A
+      MOV A,E
+      ORA H
+      JZ 
+      CPI 01H
+      JZ 
+
+      MOV A,D
+      SUB B
+      MOV D,A
+      JMP 
+
+ADDM: MOV A,D
+      ADD B
+      MOV D,A
+
+SHIFT: MOV A,C
+       ANI 01H
+       MOV E,A
+       MOV A,D
+       MOV H,A
+       RLC
+       MOV A,H
+       RAR
+       MOV D,A
+       MOV A,C
+       RAR
+       MOV C,A
+
+       DCR L
+       JNZ LOOP
+
+       MOV H,D          
+       MOV L,C          
+       HLT
