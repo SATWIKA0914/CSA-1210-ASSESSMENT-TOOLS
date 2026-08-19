@@ -1,0 +1,23 @@
+MVI B, 25H
+MVI C, 15H
+
+MOV D, B
+MOV E, C
+
+MOV A, B
+ADD C
+MOV D, A
+
+MOV A, B
+SUB C
+MOV E, A
+
+MOV A, B
+ANA C
+MOV D, A
+
+MOV A, B
+ORA C
+MOV E, A
+
+HLT
