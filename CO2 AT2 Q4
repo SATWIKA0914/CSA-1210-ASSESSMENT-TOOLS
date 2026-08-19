@@ -1,44 +1,25 @@
+MVI A,0DH
+MOV B,A
+MVI C,03H
+MVI D,00H
+MVI E,08H
 
-MVI B,FAH       
-MVI C,05H       
-MVI D,00H       
-MVI E,00H       
-MVI L,08H       
-
-LOOP: MOV A,C
-      ANI 01H
-      MOV H,A
-      MOV A,E
-      ORA H
-      JZ SHIFT
-      CPI 01H
-      JZ ADDM
-
+LOOP: MOV A,D
+      ADD A
+      MOV D,A
+      MOV A,B
+      RAL
+      MOV B,A
       MOV A,D
-      SUB B
+      SUB C
+      JC REST
       MOV D,A
-      JMP SHIFT
+      INR B
+REST: DCR E
+      JNZ LOOP
 
-ADDM: MOV A,D
-      ADD B
-      MOV D,A
-
-SHIFT: MOV A,C
-       ANI 01H
-       MOV E,A
-       MOV A,D
-       MOV H,A
-       RLC
-       MOV A,H
-       RAR
-       MOV D,A
-       MOV A,C
-       RAR
-       MOV C,A
-
-       DCR L
-       JNZ LOOP
-
-       MOV H,D          
-       MOV L,C          
-       HLT
+MOV A,B
+STA 2050H
+MOV A,D
+STA 2051H
+HLT
